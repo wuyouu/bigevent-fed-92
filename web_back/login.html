@@ -60,6 +60,9 @@
 
   <!-- 引入boot文件 -->
   <script src="./js/bootstrap/js/bootstrap.min.js"></script>
+
+  <!-- 引入config.js -->
+  <script src="./tools/config.js"></script>
   <script>
     /*
       步骤：
@@ -85,13 +88,12 @@
         // alert('请完整填写登录内容!~');
         // 2.1 将提示方式更改为模态框
         $myModal.modal('show').find('.modal-body').text('请完整填写登录内容!~');
-
         return;
       }
       // 3 将输入内容发送给接口进行登录检测
       $.ajax({
         type: 'post',
-        url: 'http://localhost:8000/admin/login',
+        url: LOGIN, // 将地址进行特殊处理，方便后期维护，并且避免修改
         data: {
           user_name: username,
           password: password
@@ -107,8 +109,6 @@
           }
         }
       });
-
-
     });
 
 
