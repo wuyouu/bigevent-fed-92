@@ -93,19 +93,22 @@
       }
       // 3 将输入内容发送给接口进行登录检测
       user.login({
-        user_name: username,
-        password: password
-      }, function (res) {
-        // 4 根据响应状态进行判断
-        if (res.code === 200) {
+        data: {
+          username: username,
+          password: password
+        },
+        success: function () {
           // 4.1 跳转到首页
           location.href = './index.html';
-        } else {
-          // alert9('用户名或密码错误');
+        },
+        fail: function () {
+          // alert('用户名或密码错误');
           $myModal.modal('show').find('.modal-body').text('用户名或密码错误!~');
         }
       });
     });
+
+
 
 
   </script>

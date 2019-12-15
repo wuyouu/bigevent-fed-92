@@ -2,107 +2,161 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>大事件-后台首页</title>
-    <link rel="stylesheet" href="js/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/iconfont.css">
-    <link rel="stylesheet" href="css/main.css">
-    <script src="js/jquery-1.12.4.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>大事件-后台首页</title>
+  <link rel="stylesheet" href="js/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/iconfont.css">
+  <link rel="stylesheet" href="css/main.css">
+  <script src="js/jquery-1.12.4.min.js"></script>
 </head>
 
 <body>
-    <div class="sider">
-        <a href="#" class="logo"><img src="images/logo02.png" alt="logo"></a>
-        <div class="user_info">
-            <img src="images/2.jpg" alt="person">
-            <span>欢迎&nbsp;&nbsp;李思思</span>
-            <b>管理员</b>
-        </div>
-        <div class="menu">
-            <div class="level01 active"><a href="main_count.html" target="main_frame"><i class="iconfont icon-yidiandiantubiao04"></i><span>首页</span></a></div>
-            <div class="level01"><a href="#"><i class="iconfont icon-icon-article"></i><span>文章管理</span><b
-                        class="iconfont icon-arrowdownl"></b></a></div>
-            <ul class="level02">
-                <li><a href="article_list.html" target="main_frame"><i class="iconfont icon-previewright"></i><span>文章列表</span></a></li>
-                <li><a href="article_release.html" target="main_frame"><i class="iconfont icon-previewright"></i><span>发表文章</span></a></li>
-                <li><a  href="article_category.html" target="main_frame"><i class="iconfont icon-previewright"></i><span>文章类别管理</span></a></li>
-            </ul>
-
-            <div class="level01"><a href="comment_list.html" target="main_frame"><i class="iconfont icon-comment"></i><span>评论管理</span></a></div>
-            <div class="level01"><a  href="user.html" target="main_frame"><i class="iconfont icon-user"></i><span>个人中心</span></a></div>
-        </div>
+  <div class="sider">
+    <a href="#" class="logo"><img src="images/logo02.png" alt="logo"></a>
+    <div class="user_info">
+      <img src="images/2.jpg" alt="person">
+      <span>欢迎&nbsp;&nbsp;李思思</span>
+      <b>管理员</b>
     </div>
+    <div class="menu">
+      <div class="level01 active"><a href="main_count.html" target="main_frame"><i
+            class="iconfont icon-yidiandiantubiao04"></i><span>首页</span></a></div>
+      <div class="level01"><a href="#"><i class="iconfont icon-icon-article"></i><span>文章管理</span><b
+            class="iconfont icon-arrowdownl"></b></a></div>
+      <ul class="level02">
+        <li><a href="article_list.html" target="main_frame"><i
+              class="iconfont icon-previewright"></i><span>文章列表</span></a></li>
+        <li><a href="article_release.html" target="main_frame"><i
+              class="iconfont icon-previewright"></i><span>发表文章</span></a></li>
+        <li><a href="article_category.html" target="main_frame"><i
+              class="iconfont icon-previewright"></i><span>文章类别管理</span></a></li>
+      </ul>
 
-    <div class="header_bar">        
-        <form class="search_form">
-            <input type="text" placeholder="请输入搜索内容">
-            <i class="iconfont icon-search"></i>
-        </form>
-        <div class="user_center_link">
-            <a href="user.html" onclick="setMenu(3,0)" target="main_frame">个人中心</a>
-            <img src="images/2.jpg" alt="person">
-            <a href="#"><i class="iconfont icon-tuichu"></i> 退出</a>
-        </div>
+      <div class="level01"><a href="comment_list.html" target="main_frame"><i
+            class="iconfont icon-comment"></i><span>评论管理</span></a></div>
+      <div class="level01"><a href="user.html" target="main_frame"><i
+            class="iconfont icon-user"></i><span>个人中心</span></a></div>
     </div>
+  </div>
 
-    <div class="main" id="main_body">
-        <iframe src="main_count.html" frameborder="0" id="main_frame" name="main_frame" frameborder="0" scrolling="auto"></iframe>
+  <div class="header_bar">
+    <form class="search_form">
+      <input type="text" placeholder="请输入搜索内容">
+      <i class="iconfont icon-search"></i>
+    </form>
+    <div class="user_center_link">
+      <a href="user.html" onclick="setMenu(3,0)" target="main_frame">个人中心</a>
+      <img src="images/2.jpg" alt="person">
+      <!-- 点击退出按钮，请求接口，跳转到登录页面 -->
+      <!-- 添加类名方便获取 -->
+      <a href="javascript:;" class="logout"><i class="iconfont icon-tuichu"></i> 退出</a>
     </div>
+  </div>
+
+  <div class="main" id="main_body">
+    <iframe src="main_count.html" frameborder="0" id="main_frame" name="main_frame" frameborder="0"
+      scrolling="auto"></iframe>
+  </div>
+
+
+  <!-- 下面的js是左侧列表的动态效果，不需要我们操作，当看不见就可以了 -->
+  <script>
+    var $level01 = $('.level01');
+    var $subli = $('.level02 li')
+    $level01.click(function () {
+      $level01.not($(this)).removeClass('active');
+      $(this).addClass('active');
+
+      if ($(this).next().hasClass('level02')) {
+        $(this).next().slideToggle();
+        $(this).find('b').toggleClass('rotate0');
+      } else {
+        $subli.removeClass('active');
+      }
+    })
+
+    $subli.click(function () {
+      $subli.not($(this)).removeClass('active');
+      $(this).addClass('active');
+
+      if (!$(this).parent().prev().hasClass('active')) {
+        $level01.removeClass('active');
+        $(this).parent().prev().addClass('active');
+      }
+    })
+
+    function resizeFrame() {
+      var frame_w = $('#main_body').outerWidth();
+      var frame_h = $('#main_body').outerHeight();
+      $('#main_frame').css({ 'width': frame_w, 'height': frame_h });
+    }
+
+    resizeFrame();
+
+    $(window).resize(function () {
+      resizeFrame();
+    })
+
+
+    function setMenu(m, n) {
+      $level01.eq(m).addClass('active').siblings().not('.level02').removeClass('active');
+      if (m != 1) {
+        $('.level02').slideUp();
+      } else {
+        $('.level02').slideDown();
+        $('.level02').children().eq(n).addClass('active').siblings().removeClass('active');
+      }
+    }
+
+  </script>
 
 
 
-    <script>
-        var $level01 = $('.level01');
-        var $subli = $('.level02 li')
-        $level01.click(function(){
-            $level01.not($(this)).removeClass('active');
-            $(this).addClass('active');
+  <!-- 引入config和user.js文件 -->
+  <script src="./tools/config.js"></script>
+  <script src="./tools/user.js"></script>
 
-            if($(this).next().hasClass('level02')){
-                $(this).next().slideToggle();
-                $(this).find('b').toggleClass('rotate0');
-            }else{
-                $subli.removeClass('active'); 
-            }
-        })
+  <script>
+    /*
+      退出功能：
+        步骤：
+          1 点击退出按钮
+          2 设置确认是否退出
+          3 如果确定，请求接口进行退出操作
+          4 跳转到登录页面
+    */
 
-        $subli.click(function(){
-            $subli.not($(this)).removeClass('active');
-            $(this).addClass('active');
-
-            if(!$(this).parent().prev().hasClass('active')){
-                $level01.removeClass('active');
-                $(this).parent().prev().addClass('active');
-            }
-        })
-
-        function resizeFrame(){
-            var frame_w = $('#main_body').outerWidth();
-			var frame_h = $('#main_body').outerHeight();
-			$('#main_frame').css({'width':frame_w,'height':frame_h});
+    var $logout = $('.logout');
+    // 1 添加事件
+    $logout.on('click', function () {
+      // 2 询问用户是否确定退出
+      //   与alert/prompt一样，confirm()也是window的方法
+      //   弹出的提示框具有确定和取消按钮，点击确定返回true，点击取消返回false
+      if (!confirm('请问确认要退出么？')) {
+        return;
+      }
+      // 3 发送请求
+      user.logout({
+        success: function () {
+          // 3.1 退出成功，跳转到登录页面
+          location.href = './login.html';
+        },
+        fail: function () {
+          // 3.2 退出失败，进行提示
+          alert('网络不好，稍后再试~');
         }
-
-        resizeFrame();
-
-        $(window).resize(function(){
-            resizeFrame();
-        })
+      });
 
 
-        function setMenu(m,n){
-           $level01.eq(m).addClass('active').siblings().not('.level02').removeClass('active');
-           if(m!=1){              
-              $('.level02').slideUp(); 
-           }else{
-              $('.level02').slideDown();
-              $('.level02').children().eq(n).addClass('active').siblings().removeClass('active');
-           }
-        }
 
-    </script>
+    })
+
+
+  </script>
 
 </body>
+
 </html>
