@@ -61,8 +61,9 @@
   <!-- 引入boot文件 -->
   <script src="./js/bootstrap/js/bootstrap.min.js"></script>
 
-  <!-- 引入config.js -->
+  <!-- 引入config.js和user.js -->
   <script src="./tools/config.js"></script>
+  <script src="./tools/user.js"></script>
   <script>
     /*
       步骤：
@@ -91,22 +92,17 @@
         return;
       }
       // 3 将输入内容发送给接口进行登录检测
-      $.ajax({
-        type: 'post',
-        url: LOGIN, // 将地址进行特殊处理，方便后期维护，并且避免修改
-        data: {
-          user_name: username,
-          password: password
-        },
-        success: function (res) {
-          // 4 根据响应状态进行判断
-          if (res.code === 200) {
-            // 4.1 跳转到首页
-            location.href = './index.html';
-          } else {
-            // alert('用户名或密码错误');
-            $myModal.modal('show').find('.modal-body').text('用户名或密码错误!~');
-          }
+      user.login({
+        user_name: username,
+        password: password
+      }, function (res) {
+        // 4 根据响应状态进行判断
+        if (res.code === 200) {
+          // 4.1 跳转到首页
+          location.href = './index.html';
+        } else {
+          // alert9('用户名或密码错误');
+          $myModal.modal('show').find('.modal-body').text('用户名或密码错误!~');
         }
       });
     });
