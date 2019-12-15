@@ -9,6 +9,7 @@
   <link rel="stylesheet" type="text/css" href="css/reset.css">
   <link rel="stylesheet" type="text/css" href="css/iconfont.css">
   <link rel="stylesheet" type="text/css" href="css/main.css">
+  <link rel="stylesheet" href="./js/bootstrap/css/bootstrap.min.css">
 </head>
 
 <body>
@@ -32,8 +33,33 @@
 
   </div>
 
+  <!-- 下面是模态框的结构部分 -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+              aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">提示信息</h4>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">阅</button>
+          <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
   <!-- 引入jQuery文件 -->
   <script src="./js/jquery-1.12.4.min.js"></script>
+
+  <!-- 引入boot文件 -->
+  <script src="./js/bootstrap/js/bootstrap.min.js"></script>
   <script>
     /*
       步骤：
@@ -49,18 +75,19 @@
 
     var $ipt_txt = $('.input_txt'); // 用户名输入框
     var $ipt_pass = $('.input_pass'); // 密码输入框
-
+    var $myModal = $('#myModal'); // 要进行内容展示的模态框
     // 1 设置事件
     $('.input_sub').on('click', function () {
       // 2 获取输入框内容进行检测
       var username = $ipt_txt.val().trim();
       var password = $ipt_pass.val().trim();
-
       if (username === '' || password === '') {
-        alert('请完整填写登录内容!~');
+        // alert('请完整填写登录内容!~');
+        // 2.1 将提示方式更改为模态框
+        $myModal.modal('show').find('.modal-body').text('请完整填写登录内容!~');
+
         return;
       }
-
       // 3 将输入内容发送给接口进行登录检测
       $.ajax({
         type: 'post',
@@ -75,7 +102,8 @@
             // 4.1 跳转到首页
             location.href = './index.html';
           } else {
-            alert('用户名或密码错误');
+            // alert('用户名或密码错误');
+            $myModal.modal('show').find('.modal-body').text('用户名或密码错误!~');
           }
         }
       });
