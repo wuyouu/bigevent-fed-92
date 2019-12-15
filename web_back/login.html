@@ -2,35 +2,89 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>大事件-后台登录页</title>
-    <link rel="stylesheet" type="text/css" href="css/reset.css">
-    <link rel="stylesheet" type="text/css" href="css/iconfont.css">
-    <link rel="stylesheet" type="text/css" href="css/main.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>大事件-后台登录页</title>
+  <link rel="stylesheet" type="text/css" href="css/reset.css">
+  <link rel="stylesheet" type="text/css" href="css/iconfont.css">
+  <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 
 <body>
-    <div class="main_wrap">
-        <div class="header">
-            <a href="#" class="logo"><img src="images/logo.png" alt=""></a>
-            <div class="copyright">CopyRight © 2019 深圳百秀信息技术股份有限公司<br>All Rights Reserved</div>
-        </div>
+  <div class="main_wrap">
+    <div class="header">
+      <a href="#" class="logo"><img src="images/logo.png" alt=""></a>
+      <div class="copyright">CopyRight © 2019 深圳百秀信息技术股份有限公司<br>All Rights Reserved</div>
+    </div>
 
-        <div class="login_form_con">
-            <div class="login_title"></div>
-            <form class="login_form">
-                <i class="iconfont icon-user"></i>
-                <i class="iconfont icon-key"></i>
-                <input type="text" class="input_txt" placeholder="邮箱/手机号">
-                <input type="password" class="input_pass" placeholder="密码">
-                <input type="submit" class="input_sub" value="登 录">
-            </form>
-        </div>
+    <div class="login_form_con">
+      <div class="login_title"></div>
+      <form class="login_form">
+        <i class="iconfont icon-user"></i>
+        <i class="iconfont icon-key"></i>
+        <input type="text" class="input_txt" placeholder="邮箱/手机号">
+        <input type="password" class="input_pass" placeholder="密码">
+        <!-- <input type="submit" class="input_sub" value="登 录"> -->
+        <input type="button" class="input_sub" value="登 录">
+      </form>
+    </div>
 
-    </div> 
+  </div>
 
+  <!-- 引入jQuery文件 -->
+  <script src="./js/jquery-1.12.4.min.js"></script>
+  <script>
+    /*
+      步骤：
+        1 对提交按钮进行处理
+          方式1：阻止默认的提交行为   方式2：修改为普通按钮
+        2 给按钮设置点击事件
+        3 检测两个输入框内容是否为空
+        4 如果内容检测通过，将内容发送给接口进行检测
+        5 接收响应内容
+          5.1 成功时跳转到index.html
+          5.2 失败时进行错误提示即可
+    */
+
+    var $ipt_txt = $('.input_txt'); // 用户名输入框
+    var $ipt_pass = $('.input_pass'); // 密码输入框
+
+    // 1 设置事件
+    $('.input_sub').on('click', function () {
+      // 2 获取输入框内容进行检测
+      var username = $ipt_txt.val().trim();
+      var password = $ipt_pass.val().trim();
+
+      if (username === '' || password === '') {
+        alert('请完整填写登录内容!~');
+        return;
+      }
+
+      // 3 将输入内容发送给接口进行登录检测
+      $.ajax({
+        type: 'post',
+        url: 'http://localhost:8000/admin/login',
+        data: {
+          user_name: username,
+          password: password
+        },
+        success: function (res) {
+          // 4 根据响应状态进行判断
+          if (res.code === 200) {
+            // 4.1 跳转到首页
+            location.href = './index.html';
+          } else {
+            alert('用户名或密码错误');
+          }
+        }
+      });
+
+
+    });
+
+
+  </script>
 </body>
 
 </html>
