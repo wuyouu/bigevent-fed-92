@@ -2,69 +2,168 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>文章列表</title>
-    <link rel="stylesheet" href="js/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/iconfont.css">
-    <link rel="stylesheet" href="css/main.css">
-    <script src="js/jquery-1.12.4.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>文章列表</title>
+  <link rel="stylesheet" href="js/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/iconfont.css">
+  <link rel="stylesheet" href="css/main.css">
+  <script src="js/jquery-1.12.4.min.js"></script>
 
 </head>
 
 <body>
-    <div class="container-fluid">
-        <div class="common_title">
-            用户信息修改
-        </div>
-        <div class="container-fluid common_con">
-            <form class="form-horizontal article_form">
-                <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">用户名称：</label>
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" id="inputEmail3" value="李思思">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">昵称：</label>
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" id="inputEmail3" value="思思">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">邮箱：</label>
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" id="inputEmail3" value="lisisi@126.com">
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="inputPassword3" class="col-sm-2 control-label">用户图标：</label>
-                    <div class="col-sm-10">
-                        <img src="images/2.jpg" alt="" class="user_pic">
-                        <input type="file" id="exampleInputFile">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-2 control-label">密码：</label>
-                        <div class="col-sm-4">
-                            <input type="password" class="form-control" id="inputEmail3" value="12345678">
-                        </div>
-                    </div>
-               
-    
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-success">修改</button>
-                    </div>
-                </div>
-            </form>
-        </div>
+  <div class="container-fluid">
+    <div class="common_title">
+      用户信息修改
     </div>
+    <div class="container-fluid common_con">
+      <form class="form-horizontal article_form">
+        <div class="form-group">
+          <label for="username" class="col-sm-2 control-label">用户名称：</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" id="username" name="username" value="李思思">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="nickname" class="col-sm-2 control-label">昵称：</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" id="nickname" name="nickname" value="思思">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email" class="col-sm-2 control-label">邮箱：</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" id="email" name="email" value="lisisi@126.com">
+          </div>
+        </div>
 
+        <div class="form-group">
+          <label for="user_pic" class="col-sm-2 control-label">用户图标：</label>
+          <div class="col-sm-10">
+            <img src="images/2.jpg" alt="" class="user_pic" id="avatar">
+            <input type="file" id="user_pic" name="user_pic">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password" class="col-sm-2 control-label">密码：</label>
+          <div class="col-sm-4">
+            <input type="password" class="form-control" id="password" name="password" value="12345678">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <!-- <button type="submit" class="btn btn-success">修改</button> -->
+            <button type="button" class="btn btn-success" id="btn">修改</button>
+
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    /*
+      用户的信息获取与展示
+        1 请求用户的详细信息
+          - 给表单中的元素设置与相应数据相同的id，方便获取
+        2 将信息展示在页面中即可
+    */
+    // 1 发送请求
+    $.ajax({
+      url: 'http://localhost:8000/admin/userinfo_get',
+      success: function (res) {
+        // 1.1 检测响应是否成功
+        if (res.code === 200) {
+          // 1.2 将数据展示到内容中
+          // - 遍历（此方式可选，也可以不做遍历，一个一个设置表单元素内容）
+          $.each(res.data, function (k, ele) {
+            // 遍历得到的属性名，和要设置的元素id相同(之前自己设置的id)
+            //  - 用户的头像展示需要使用img，而不能给文件域设置地址
+            if (k === 'user_pic') {
+              $('#avatar').prop('src', ele); // 将地址设置给文件域前面的img标签
+
+              return; // 阻止后续操作
+            }
+            $('#' + k).val(ele);
+          });
+        }
+      }
+    });
+
+
+    /*
+      用户的信息编辑功能
+        1 检测是否完整填写表单
+          输入框检测val()，文件域检测是否选取文件
+        2 给表单中的元素设置name属性，否则无法提交
+          进行提交按钮处理
+        3 提交到服务端进行编辑
+        4 图片的本地预览
+    */
+
+    // 1 点击按钮，检测表单是否填写完毕
+    $('#btn').on('click', function () {
+      // 1.1 检测内容
+      //    - 检测文件域是否选择文件，
+      //    使用DOM对象的files属性，进行length检测
+      if (
+        $('#username').val().trim() === '' ||
+        $('#nickname').val().trim() === '' ||
+        $('#email').val().trim() === '' ||
+        $('#password').val().trim() === '' ||
+        $('#user_pic')[0].files.length === 0
+      ) {
+        alert('内容没有填写完毕');
+        return; // 阻止后续的请求发送
+      }
+
+      // 1.2 将数据发送给服务端处理（使用FormData即可）
+      //    - 传入参数必须为DOM对象形式的form标签
+      var fd = new FormData($('form')[0]);
+
+      // 1.3 使用jQuery的ajax发送
+      $.ajax({
+        type: 'POST',
+        url: 'http://localhost:8000/admin/userinfo_edit',
+        data: fd,
+        contentType: false, // 不需要jQuery设置内容类型
+        processData: false, // 不需要jQuery进行内容处理
+        success: function (res) {
+          if (res.code === 200) {
+            // 1.4 让当前user.html的iframe所在的index.html跳转到login.html
+            //    - window.parent用来获取父页面的window对象，也就是index.html页面的window
+            // window.location.href = './login.html'; // 当前小窗口部分跳转，不对
+            parent.location.href = './login.html'; // 父页面跳转，是正确的效果
+          }
+        }
+      });
+
+    });
+
+
+    /*
+      图片本地预览
+        1 使用change事件监测用户的文件选择操作
+        2 通过 URL.createObjectURL()进行本地图片地址获取
+          - URL是window对象的属性
+          - 用户在本地选择的图片地址我们不可能提前知道
+          - 使用方式：
+            URL.createObjectURL(文件域的files中的文件信息)
+            - 返回值是浏览器自动生成的临时图片地址，可以设置在src中查看
+    */
+    // 1 给文件域设置change事件
+    $('#user_pic').on('change', function () {
+      // console.log($(this)[0].files); // 查看文件域选择的文件信息
+      // console.log(URL.createObjectURL($(this)[0].files[0])); // 将某个文件的信息传入到方法中
+      var tempSrc = URL.createObjectURL($(this)[0].files[0]);
+      $('#avatar').prop('src', tempSrc); // 将方法生成的临时图片地址设置给img展示即可
+    });
+  </script>
 </body>
 
 </html>

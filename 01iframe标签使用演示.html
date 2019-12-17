@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+  <title>Document</title>
+</head>
+
+<body>
+  <button id="btn">修改iframe的src切换展示的页面</button>
+  <iframe id="iframe" src="http://www.baidu.com" frameborder="0"></iframe>
+  <script>
+    document.getElementById('btn').onclick = function () {
+      document.getElementById('iframe').src = 'http://www.taobao.com';
+    }
+
+
+
+  </script>
+</body>
+
+</html>
