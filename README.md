@@ -30,7 +30,7 @@
   - 在boot文档中找到js插件，找到模态框部分
   - 复制结构到html中，并进行内容修改
   - 替换代码中的alert，更换为模态框的modal方法
-- 使用config.js统一管理接口地址
+- **使用config.js统一管理接口地址**
   - 作用：后期维护时，接口地址变化可以在config.js中统一修改，无需到每个html文件中操作
   - 操作步骤：
     - 在根目录下创建tools目录，并新建config.js，例如/web_back/tools/config.js
@@ -38,7 +38,7 @@
       - 将基地址使用变量统一保存，并拼接其他接口地址
     - 在页面例如login.html中引入config.js并将原始接口地址替换
 
-- 使用user.js统一管理用户接口的ajax操作：
+- **使用user.js统一管理用户接口的ajax操作：**
   - 作用：后期维护时，接口使用方式变化可以在user.js中管理
   - 操作步骤：
     - 在tools目录中创建user.js，例如 /web_back/tools/user.js
@@ -55,8 +55,9 @@
 
 - 退出功能
   - 退出按钮点击事件
-  - 使用confirm询问是否确认退出
-    - confirm有确定和取消按钮，点击确定返回true，点击取消返回false
+  - 使用**confirm()**询问是否确认退出
+    - confirm()类似alert()与prompt()，是提示框效果
+      - 具有确定和取消按钮，**点击确定返回true，点击取消返回false**
   - 请求接口
   - 对响应进行处理
     - 退出成功，跳转登录页
@@ -103,6 +104,7 @@
             - **URL.createObjectURL(文件域的files中的文件信息)**
                 - 例如：URL.createObjectURL(iptFile.files[0]);   // 实例中iptFile为文件域，DOM对象
           - 返回值是浏览器自动生成的**临时图片地址，可以设置在src中查看图片**
+- 优化：将接口功能提取到user.js与config.js中
 
 ## 文章分类页面功能
 
@@ -139,3 +141,5 @@
     - 点击删除按钮，获取data-id
     - 将data-id发送给接口进行删除操作
         - 删除成功，使用location.reload()刷新页面
+  - **设置article.js用于提取文章功能的接口操作**
+      - 代码中演示article.getCate()功能设置方式
