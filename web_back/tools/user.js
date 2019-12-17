@@ -2,6 +2,7 @@
 var user = {
   // 设置login方法，用来进行登录请求操作
   login: function (options) {
+    // 如果使用函数，推荐进行参数传递的过程分析
     $.ajax({
       type: 'post',
       url: LOGIN, // 将地址进行特殊处理，方便后期维护，并且避免修改
@@ -32,5 +33,17 @@ var user = {
         }
       }
     })
+  },
+  // 设置getUser方法，用来获取用于基本信息(头像和名称)
+  getUser: function (options) {
+    $.ajax({
+      url: GET_USER,
+      success: function (res) {
+        if (res.code === 200) {
+          options.success(res.data);
+        }
+      }
+    });
+
   }
 };

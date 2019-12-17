@@ -149,10 +149,24 @@
           alert('网络不好， 稍后再试~');
         }
       });
+    });
 
 
+    /*
+      用户基本信息展示
+        步骤：
+          1 页面加载过程中直接请求用户信息
+          2 将响应数据展示在页面中即可
+    */
 
-    })
+    user.getUser({
+      success: function (data) {
+
+        // 获取左侧和顶部右侧的img，进行头像设置
+        $('.user_info img,.user_center_link img').prop('src', data.user_pic);
+        $('.user_info span').text('欢迎  ' + data.nickname);
+      }
+    });
 
 
   </script>
