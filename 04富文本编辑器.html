@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <textarea id="txt" cols="30" rows="10"></textarea>
+  <div id="box"></div>
+  <script>
+    /*
+      1 基本概念：
+          富文本：有格式的文本
+          富文本编辑器：可以书写出富文本的一种工具，称为富文本编辑器
+      2 为什么要使用富文本编辑器：
+        页面功能中如果需要输入大段内容，通常使用textarea，但是文本域的内容是没有格式的
+      3 本质：
+        其实就是给普通文本套了一些标签
+        我们就书写内容，点点按钮，就可以了
+
+      4 如何将富文本编辑器中的具有格式的内容取出
+        tinymce.activeEditor.getContent()
+    */
+
+    /*
+    // 演示，文本域的内容展示后没有格式
+    document.getElementById('txt').onblur = function () {
+      document.getElementById('box').innerHTML = this.value;
+    }; */
+
+
+  </script>
+</body>
+
+</html>

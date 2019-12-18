@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="./web_back/js/bootstrap/css/bootstrap.min.css">
+</head>
+
+<body>
+  <!-- 用来设置分页的标签结构 -->
+  <ul id="list"></ul>
+
+  <!-- 引入jQuery和插件文件，注意引入顺序 -->
+  <script src="./web_back/js/jquery-1.12.4.min.js"></script>
+  <script src="./web_back/js/jquery.twbsPagination.js"></script>
+
+  <script>
+    // 根据文档，设置分页展示功能
+    $('#list').twbsPagination({
+      totalPages: 20,
+      visiblePages: 7, // 设置显示的页码个数为 visiblePages,上午少写了个s
+      first: '首页',
+      last: '尾页',
+      prev: '上一页',
+      next: '下一页',
+      onPageClick: function (e, page) {
+        console.log(page); // 获取当前点击的页码
+      }
+    });
+
+
+
+  </script>
+</body>
+
+</html>

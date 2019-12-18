@@ -2,84 +2,141 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>文章列表</title>
-    <link rel="stylesheet" href="js/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/iconfont.css">
-    <link rel="stylesheet" href="css/main.css">
-    <link type="text/css" rel="stylesheet" href="js/jedate/css/jedate.css">
-    <script src="js/jquery-1.12.4.min.js"></script>
-    <script src="js/jedate/js/jedate.js"></script>
-    <script src="js/tinymce/js/tinymce/tinymce.min.js"></script>
-    <script src="js/tinymce/js/tinymce_setup.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>文章列表</title>
+  <link rel="stylesheet" href="js/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/iconfont.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link type="text/css" rel="stylesheet" href="js/jedate/css/jedate.css">
+  <script src="js/jquery-1.12.4.min.js"></script>
+  <script src="js/jedate/js/jedate.js"></script>
+  <script src="js/tinymce/js/tinymce/tinymce.min.js"></script>
+  <script src="js/tinymce/js/tinymce_setup.js"></script>
 </head>
 
 <body>
-    <div class="container-fluid">
-        <div class="common_title">
-            写文章
+  <div class="container-fluid">
+    <div class="common_title">
+      写文章
+    </div>
+    <div class="container-fluid common_con">
+      <form class="form-horizontal article_form">
+        <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">文章标题：</label>
+          <div class="col-sm-10">
+            <input type="email" class="form-control" id="inputEmail3" placeholder="文章标题" name="title">
+          </div>
         </div>
-        <div class="container-fluid common_con">
-            <form class="form-horizontal article_form">
-                <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">文章标题：</label>
-                    <div class="col-sm-10">
-                        <input type="email" class="form-control" id="inputEmail3" placeholder="文章标题">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputPassword3" class="col-sm-2 control-label">文章封面：</label>
-                    <div class="col-sm-10">
-                        <input type="file" id="exampleInputFile">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">文章类别：</label>
-                    <div class="col-sm-4">
-                        <select class="form-control">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">发布时间：</label>
-                    <div class="col-sm-4">
+        <div class="form-group">
+          <label for="inputPassword3" class="col-sm-2 control-label">文章封面：</label>
+          <div class="col-sm-10">
+            <input type="file" id="exampleInputFile" name="cover">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">文章类别：</label>
+          <div class="col-sm-4">
+            <!-- 文章分类的下拉菜单,需要进行结构创建 -->
+            <select class="form-control" id="selCategory" name="type">
+              <!-- <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option> -->
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">发布时间：</label>
+          <div class="col-sm-4">
 
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="YYYY-MM-DD" id="dateinput">
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" type="button"
-                                    onclick="jeDate('#dateinput',{trigger:false,format: 'YYYY-MM-DD'})"><i
-                                        class="iconfont icon-icondate"></i></button>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">文章内容：</label>
-                    <div class="col-sm-10">
-                        <textarea class="form-control" id="rich_content" name="content" placeholder="文章内容">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="YYYY-MM-DD" name="date" id="dateinput" readonly>
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button"
+                  onclick="jeDate('#dateinput',{trigger:false,format: 'YYYY-MM-DD'})"><i
+                    class="iconfont icon-icondate"></i></button>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">文章内容：</label>
+          <div class="col-sm-10">
+            <textarea class="form-control" id="rich_content" placeholder="文章内容">
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda fugiat illo nihil molestias ab. Laborum eius non atque, totam sapiente quae obcaecati assumenda ratione inventore pariatur maiores, qui libero delectus.
                             </textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-success">发布</button>
-                        <button type="submit" class="btn btn-default">存为草稿</button>
-                    </div>
-                </div>
-            </form>
+          </div>
         </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="button" class="btn btn-success" id="publish">发布</button>
+            <!-- <button type="submit" class="btn btn-success">发布</button> -->
+            <button type="submit" class="btn btn-default">存为草稿</button>
+          </div>
+        </div>
+      </form>
     </div>
+  </div>
 
+  <!-- 引入config和article.js文件 -->
+  <script src="./tools/config.js"></script>
+  <script src="./tools/article.js"></script>
+
+  <!-- 引入模板引擎 -->
+  <script src="./js/template-web.js"></script>
+
+  <!-- 设置模板用于创建分类下拉菜单结构 -->
+  <script type="text/template" id="category">
+    {{each data val}}
+      <option value="{{val.id}}">{{val.name}}</option>
+    {{/each}}
+  </script>
+
+  <script>
+    // 1 请求文章分类信息，进行分类下拉菜单生成
+    article.getCate({
+      success: function (res) {
+        $('#selCategory').html(template('category', res));
+      }
+    });
+
+    // 2 点击发布按钮
+    $('#publish').on('click', function () {
+      // 2.1 进行内容检测，为空进行提示
+
+
+      // 2.2 使用formData进行表单处理(这里是具有name的表单元素)
+      var fd = new FormData($('form')[0]);
+
+      // 2.3 将富文本编辑器内容取出，添加到FormData中，设置state为已发布
+      fd.append('content', tinymce.activeEditor.getContent());
+      fd.append('state', '已发布');
+
+      // 3 发送请求，进行新增操作
+      $.ajax({
+        type: 'POST',
+        url: 'http://localhost:8000/admin/article_publish',
+        data: fd,
+        contentType: false,
+        processData: false,
+        success: function (res) {
+          // 3.1 检测新增是否成功，成功后进行跳转，跳到列表页展示
+          if (res.code === 201) {
+            location.href = 'article_list.html';
+          } else {
+            alert('网络不好，请稍后再试');
+          }
+        }
+      });
+
+    });
+
+
+  </script>
 </body>
 
 </html>

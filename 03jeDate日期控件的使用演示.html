@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="./web_back/js/jedate/css/jedate.css">
+</head>
+
+<body>
+  <input type="text" id="test" readonly>
+  <button id="btn">显示日期</button>
+  <script src="web_back/js/jedate/js/jedate.js"></script>
+  <script>
+    // 一个原生js编写的日期控件，地址： http://www.jemui.com/uidoc/jedate.html
+
+
+    // 设置btn的事件，点击btn后弹出日期控件效果
+    document.querySelector('#btn').onclick = function () {
+      jeDate("#test", {
+        format: "YYYY-MM-DD",
+        isTime: false,
+        trigger: false, // 不使用内置的事件功能，自己进行设置
+        minDate: "2014-09-19 00:00:00"
+      });
+    };
+
+  </script>
+</body>
+
+</html>
