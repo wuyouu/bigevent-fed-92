@@ -34,7 +34,7 @@ var user = {
       }
     })
   },
-  // 设置getUser方法，用来获取用于基本信息(头像和名称)
+  // 设置getUser方法，用来获取用户基本信息(头像和名称)
   getUser: function (options) {
     $.ajax({
       url: GET_USER,
@@ -44,6 +44,17 @@ var user = {
         }
       }
     });
-
+  },
+  // 设置getUserInfo方法，用来获取用户的详细信息（user.html中使用）
+  getUserInfo: function (options) {
+    $.ajax({
+      url: GET_USER_INFO,
+      success: function (res) {
+        // 1.1 检测响应是否成功
+        if (res.code === 200) {
+          options.success(res);
+        }
+      }
+    });
   }
 };

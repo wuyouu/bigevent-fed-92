@@ -66,6 +66,8 @@
     </div>
   </div>
 
+  <script src="./tools/config.js"></script>
+  <script src="./tools/user.js"></script>
   <script>
     /*
       用户的信息获取与展示
@@ -74,24 +76,20 @@
         2 将信息展示在页面中即可
     */
     // 1 发送请求
-    $.ajax({
-      url: 'http://localhost:8000/admin/userinfo_get',
+    user.getUserInfo({
       success: function (res) {
-        // 1.1 检测响应是否成功
-        if (res.code === 200) {
-          // 1.2 将数据展示到内容中
-          // - 遍历（此方式可选，也可以不做遍历，一个一个设置表单元素内容）
-          $.each(res.data, function (k, ele) {
-            // 遍历得到的属性名，和要设置的元素id相同(之前自己设置的id)
-            //  - 用户的头像展示需要使用img，而不能给文件域设置地址
-            if (k === 'user_pic') {
-              $('#avatar').prop('src', ele); // 将地址设置给文件域前面的img标签
+        // 1.2 将数据展示到内容中
+        // - 遍历（此方式可选，也可以不做遍历，一个一个设置表单元素内容）
+        $.each(res.data, function (k, ele) {
+          // 遍历得到的属性名，和要设置的元素id相同(之前自己设置的id)
+          //  - 用户的头像展示需要使用img，而不能给文件域设置地址
+          if (k === 'user_pic') {
+            $('#avatar').prop('src', ele); // 将地址设置给文件域前面的img标签
 
-              return; // 阻止后续操作
-            }
-            $('#' + k).val(ele);
-          });
-        }
+            return; // 阻止后续操作
+          }
+          $('#' + k).val(ele);
+        });
       }
     });
 

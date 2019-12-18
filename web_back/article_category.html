@@ -178,7 +178,6 @@
       }
     });
 
-
     // --- 分类数据新增功能
     // 1 设置新增按钮点击事件
     $('#modal_add').on('click', function () {
@@ -214,7 +213,8 @@
     // 4 设置关闭按钮功能
     $('#modal_shutoff').on('click', function () {
       $('form')[0].reset();
-      $('#addModal').modal('hide');
+      // $('#addModal').modal('hide');
+      $('#addModal').hide();
     });
 
 
@@ -268,17 +268,12 @@
       var id = $(this).data('id');
 
       // 3 调用接口发送id
-      $.ajax({
-        type: 'post',
-        url: 'http://localhost:8000/admin/category_delete',
+      article.delCate({
         data: {
           id: id
         },
-        success: function (res) {
-          // 3.1 检测响应的删除状态是否成功
-          if (res.code === 200) {
-            location.reload();
-          }
+        success: function () {
+          location.reload();
         }
       })
     });
